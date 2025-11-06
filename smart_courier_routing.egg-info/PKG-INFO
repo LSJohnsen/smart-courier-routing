@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: smart-courier-routing
+Version: 1.0.0
+Summary: Courier route optimization with time, cost, CO2, and Pareto sweep
+Home-page: https://github.com/LSJohnsen/smart-courier-routing
+Author: Lars Johnsen
+Author-email: s359056@oslomet.no
+Requires-Python: >=3.9

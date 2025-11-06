@@ -1,0 +1,2 @@
+[console_scripts]
+smart-courier = SMART_COURIER.main:main

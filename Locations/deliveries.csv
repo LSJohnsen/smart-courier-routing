@@ -1,0 +1,25 @@
+customer,longitude,latitude,priority,weight_kg
+Olav Hansen,10.7522,59.9139,high,2.5
+Kari Nordmann,10.7371,59.9220,medium,1.2
+Nordic Books AS,10.7580,59.9155,low,5.0
+Oslo Café,10.7320,59.9188,high,0.8
+Sven Pettersen,10.7765,59.9113,medium,3.4
+Grønland Electronics,10.7510,59.9082,high,7.6
+Lise Jensen,10.7204,59.9261,low,0.5
+Fjord Furniture,10.8242,59.9147,medium,12.0
+Bjørn Aasen,10.7468,59.9009,low,4.3
+Vika Logistics,10.7395,59.9127,high,18.2
+Marianne Olsen,10.7601,59.9294,medium,0.9
+Sørenga Flowers,10.7518,59.9076,low,1.1
+TechHub Oslo,10.7867,59.9181,high,6.7
+Hanna Berg,10.6965,59.9299,medium,2.0
+Mathias Eriksen,10.7703,59.9206,low,0.6
+Sentrum Pharmacy,10.7529,59.9123,high,3.0
+Kveld Mat AS,10.7412,59.9057,medium,8.5
+Nordea Branch,10.7389,59.9150,low,0.3
+Ekeberg Studio,10.7684,59.8954,medium,9.7
+Opera House Supplies,10.6650,59.9075,high,14.0
+error test, 190, 50, high, 12
+error test two, 120, 50, invalid, 10
+1232414, 10.7522,59.9139,medium,2.5
+weight test,10.7522,59.9139,high,-5
