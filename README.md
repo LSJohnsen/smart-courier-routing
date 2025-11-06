@@ -24,7 +24,7 @@ The system supports **time**, **cost**, **CO₂**, and **multi-objective** optim
 ## Installation (Local)
 
 1. Clone or download this repository:
-   bash
+   ```bash
    git clone https://github.com/LSJohnsen/smart-courier-routing.git
    cd smart-courier-routing
    pip install -e .
