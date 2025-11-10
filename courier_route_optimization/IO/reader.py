@@ -20,7 +20,7 @@ def load_depot(json_path: Path):
             return {"name": "Depot", "lat": lat, "lon": lon}
         except Exception as e:
             raise ValueError(f"Invalid depot data: {e}")
-    
+  
 def load_deliveries(csv_path: Path):
     deliveries = []
     rejected = []

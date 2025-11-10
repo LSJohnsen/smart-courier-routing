@@ -1,0 +1,5 @@
+row,cause,customer,latitude,longitude,priority,weight_kg
+22,Coordinates are out of valid range,error test, 50, 190, high, 12
+23,The priority value is not valid (high/medium/low),error test two, 50, 120, invalid, 10
+24,Invalid customer name (contains digits or illegal characters),1232414,59.9139, 10.7522,medium,2.5
+25,The package weight is zero or negative value,weight test,59.9139,10.7522,high,-5

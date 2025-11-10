@@ -32,7 +32,7 @@ def plot_route(path, save=False, res='h'):
     m.drawparallels(range(int(llcrnrlat), int(urcrnrlat) + 1, 1), labels=[1,0,0,0])
     m.drawmeridians(range(int(llcrnrlon), int(urcrnrlon) + 1, 1), labels=[0,0,0,1])
 
-    # Plot delivery points (in order)
+    # Plot delivery points 
     x, y = m(lon, lat)
 
     m.plot(lon, lat, latlon=True, color="darkred", linewidth=2, zorder=4)
@@ -52,8 +52,16 @@ def plot_route(path, save=False, res='h'):
     plt.title("Optimized Delivery Route (Oslo area)")
     plt.show()
 
-    if save == True:
-        fig.savefig("optimized_route.eps", format="eps")
+    if save:
+    
+        fig.savefig(
+                "optimized_route.eps",
+                format="eps",
+                bbox_inches='tight',   
+                pad_inches=0.05,       
+                dpi=300                
+            )
+        plt.close(fig)             
 
 
 ### Not used, gpt generated for testing 

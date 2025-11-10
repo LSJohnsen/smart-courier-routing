@@ -29,10 +29,10 @@ To run optimal routes in multi-objective apply one of the non-dominated solution
     # 3: multi-objective
 
 
-multi_weights = {"time": 1,     # Weights for multi-objective scoring
-                "cost": 1, 
-                "co2": 1}
-prio_gamma = 1                  # exponent weight for priority in choosing next point => priority_weight^(1+gamma*normalized_distance_to_point)
+multi_weights = {"time": 0.9167,     # Weights for multi-objective scoring
+                "cost": 0.0833, 
+                "co2": 0.5896}
+prio_gamma = 0.2                  # exponent weight for priority in choosing next point => priority_weight^(1+gamma*normalized_distance_to_point)
 
 
 def main():
@@ -120,7 +120,7 @@ def main():
 
 
     if args.plot:
-        plot_route(args.output, save=False)
+        plot_route(args.output, save=True)
         # Example: compare objectives for the same route
         
 

@@ -2,22 +2,9 @@
 
 from datetime import datetime, timedelta
 from courier_route_optimization.constants import Mode, MODE_PARAMS, URGENCY_MULT, EARTH_RADIUS_KM
-from courier_route_optimization.utils import normalize
+from courier_route_optimization.utils import normalize, haversine
 import math
 
-# calculates distances from lat/lon, based on https://github.com/mapado/haversine/blob/main/haversine/haversine.py
-def haversine(lat1, lon1, lat2, lon2, R=EARTH_RADIUS_KM):
-
-    lat1 = math.radians(lat1)
-    lon1 = math.radians(lon1)
-    lat2 = math.radians(lat2)
-    lon2 = math.radians(lon2)
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-    a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    
-    return R * c
 
 
 '''
@@ -133,14 +120,12 @@ class RouteOptimizer:
                 # get keys for each remaining delivery based on weighted sum of time, cost and co2. also uses the priority scaling for the time metric. 
                 def key_multi(k: int) -> float:
                     distance = distances[k]
-                    time = distance / speed     
-                    cost = distance * cost_per_km
-                    co2 = distance * co2_per_km
+                    d_time, d_cost, d_co2 = self._delivery_metrics(distance)
                     d_norm = distance / d_max
                     base_prio = URGENCY_MULT[self.deliveries[k]["priority"]]
                     prio_dyn = base_prio ** (1.0 + prio_gamma * d_norm)
                  
-                    return w_time * prio_dyn * time + w_cost * cost + w_co2 * co2 # determine the actual metrics and apply weights
+                    return w_time * prio_dyn * d_time + w_cost * d_cost + w_co2 * d_co2 # determine the actual metrics and apply weights
 
                 j_multi = min(remaining_deliveries_m, key=key_multi)
                 order_multi.append(j_multi)
@@ -307,7 +292,6 @@ class RouteOptimizer:
         distance = haversine(last["lat"], last["lon"], self.depot["lat"], self.depot["lon"])
         d_time, d_cost, d_co2 = self._delivery_metrics(distance)
         add_stop(self.depot["name"], self.depot["lat"], self.depot["lon"], distance, d_time, d_cost, d_co2)
-
 
         return route
 
