@@ -1,9 +1,9 @@
 # Smart Courier Routing
 
-**Smart Courier Routing** is a Python-based optimization tool for delivery route planning created in accordance with the final project for ACIT4420.  
+Smart Courier Routing is an optimization tool for delivery route planning created in accordance with the final project for ACIT4420.  
 It determines the optimal delivery order for a courier service based on distance, delivery priority, and environmental or economic objectives.  
 
-The system supports **time**, **cost**, **CO₂**, and **multi-objective** optimization, and can optionally generate **Pareto fronts** to analyze trade-offs between competing metrics.
+The system supports time, cost, CO₂, and multi-objective optimization, and can optionally generate Pareto fronts to analyze trade-offs between competing metrics.
 
 ---
 
