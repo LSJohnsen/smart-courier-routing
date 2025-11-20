@@ -10,7 +10,7 @@ Contains constants for the delivery methods, urgency, and earth radius
 '''
 
 class StrEnum(str, Enum):
-    #Python 3.11 StrEnum for Python 3.10
+    #Python 3.11 StrEnum for Python 3.10 (gpt)
     pass
 
 class Mode(StrEnum):

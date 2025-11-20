@@ -32,7 +32,7 @@ To run optimal routes in multi-objective apply one of the non-dominated solution
 multi_weights = {"time": 0.9167,     # Weights for multi-objective scoring
                 "cost": 0.0833, 
                 "co2": 0.5896}
-prio_gamma = 0.2                  # exponent weight for priority in choosing next point => priority_weight^(1+gamma*normalized_distance_to_point)
+prio_gamma = 0.2                  # exponent weight for priority in choosing next point by priority_weight^(1+gamma*normalized_distance_to_point)
 
 
 def main():
@@ -77,11 +77,10 @@ def main():
     ap.add_argument("--pareto-steps", type=int, default=12, help="Grid resolution for Pareto sweep")
     args = ap.parse_args()
 
-    '''
-    load data -> run optimization -> save route -> console summary -> (optional) plotting
-    '''
+ 
+    
 
-    # Load data - IO/reader.py
+    # Load data
     depot = load_depot(Path(args.depot))                            
     deliveries, rejected = load_deliveries(Path(args.deliveries))        
     rejected_deliveries(rejected, Path(args.rejected))
@@ -108,20 +107,19 @@ def main():
 
     # Plotting
     if getattr(args, "pareto", False):
-        # Build a dedicated optimizer with 'multi' objective for the sweep
+        # do optimizer and run pareto optim with different weights from args
         pareto_opt = RouteOptimizer(
             depot, deliveries, args.mode, "multi",
             {"time": args.w_time, "cost": args.w_cost, "co2": args.w_co2}
         )
 
-        sweep = evaluate_pareto_routes(pareto_opt, n_steps=args.pareto_steps, gammas=(0.2, 0.6, 1.0, 1.6))
-        nd_idx = get_pareto_indices(sweep["performance"])
-        print(f"Pareto sweep: candidates={len(sweep['performance'])} | non-dominated={len(nd_idx)}")
+        pareto_result = evaluate_pareto_routes(pareto_opt, n_steps=args.pareto_steps, gammas=(0.2, 0.6, 1.0, 1.6))
+        non_dominated = get_pareto_indices(pareto_result["performance"])
+        print(f"Pareto sweep: candidates={len(pareto_result['performance'])}, non-dominated={len(non_dominated)}")
 
 
     if args.plot:
         plot_route(args.output, save=True)
-        # Example: compare objectives for the same route
         
 
 if __name__ == "__main__":

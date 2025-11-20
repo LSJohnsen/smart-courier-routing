@@ -8,7 +8,7 @@ from courier_route_optimization.IO.reader import load_deliveries, rejected_deliv
 from courier_route_optimization.utils import timer
 from courier_route_optimization.route_optimizer import RouteOptimizer
 
-
+# just for testing functionality outside main
 @timer
 def run(depot, deliveries, mode, objective, start=None, output="route.csv"):
     optimizer = RouteOptimizer(depot, deliveries, mode, objective)

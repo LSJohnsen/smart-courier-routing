@@ -20,9 +20,9 @@ class RouteOptimizer:
         self.objective = objective          #time|cost|co2
         self.multi_weights = multi_weights  # weights for multi-objective scoring
 
-    # Returns the metrics for delivery time, cost and CO2 
+    
     def _delivery_metrics(self, distance: float):
-        d_mode = MODE_PARAMS[self.mode]     # gets "speed", "cost", and "co2" for the chosen delivery mode
+        d_mode = MODE_PARAMS[self.mode]    
         d_time = distance / d_mode["speed"] # km_distance / km/h 
         d_cost = distance * d_mode["cost"]  # nok/km
         d_co2 = distance * d_mode["co2"]    #  g/km 

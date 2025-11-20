@@ -24,9 +24,9 @@ def load_depot(json_path: Path):
 def load_deliveries(csv_path: Path):
     deliveries = []
     rejected = []
-    NAME_OK = re.compile(r"^[A-Za-zÀ-ÖØ-öø-ÿ'’\-\.\s]+$") # regex lower/upper( english, latin, scandinavian), apo, dash, dot, space
+    NAME_OK = re.compile(r"^[A-Za-zÀ-ÖØ-öø-ÿ'’\-\.\s]+$") # lower/upper( english, latin, scandinavian), apo, dash, dot, space
     
-    with open(csv_path, 'r', newline='', encoding='utf-8') as f:
+    with open(csv_path, 'r', newline='') as f:
         reader = csv.DictReader(f)
         contents = {"customer", "latitude", "longitude", "priority", "weight_kg"}
 
@@ -42,8 +42,8 @@ def load_deliveries(csv_path: Path):
                 if not NAME_OK.match(name):
                     raise ValueError("Invalid customer name (contains digits or illegal characters)")
 
-                
-                lat_str = (row.get("latitude") or "").strip().replace(",", ".")
+                # prevent none, space, range, priority, weight 
+                lat_str = (row.get("latitude") or "").strip().replace(",", ".") 
                 lon_str = (row.get("longitude") or "").strip().replace(",", ".")
                 lat = float(lat_str)
                 lon = float(lon_str)
@@ -69,7 +69,7 @@ def load_deliveries(csv_path: Path):
                 })
 
             except Exception as e:
-                rejected.append({"row": i, "cause": str(e), **row})
+                rejected.append({"row": i, "cause": str(e), **row}) #(**kwarg unpack key-value instead of just syntax error (fixed by gpt))
 
     return deliveries, rejected
 
@@ -90,7 +90,7 @@ def write_route_csv(rows, out_path: Path):
     fields = ["customer","latitude","longitude","distance_from_previous",
               "cumulative_distance","eta_from_start",
               "time_to_current","cost_to_current","co2_to_current"]
-    with open(out_path, "w", newline="", encoding="utf-8") as f:
+    with open(out_path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)

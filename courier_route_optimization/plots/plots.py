@@ -16,9 +16,9 @@ def plot_route(path, save=False, res='h'):
 
     pad = 0.002  # smaller for closer zoom
     llcrnrlat, urcrnrlat = lat.min() - pad, lat.max() + pad
-    llcrnrlon, urcrnrlon = lon.min() - pad, lon.max() + pad
+    llcrnrlon, urcrnrlon = lon.min() - pad, lon.max() + pad # zoom of map fixed by gpt
 
-    # Create map focused on the Oslo area
+
     fig = plt.figure(figsize=(10, 8))
     m = Basemap(projection="merc", resolution=res,
                 llcrnrlat=llcrnrlat, urcrnrlat=urcrnrlat,
@@ -32,7 +32,7 @@ def plot_route(path, save=False, res='h'):
     m.drawparallels(range(int(llcrnrlat), int(urcrnrlat) + 1, 1), labels=[1,0,0,0])
     m.drawmeridians(range(int(llcrnrlon), int(urcrnrlon) + 1, 1), labels=[0,0,0,1])
 
-    # Plot delivery points 
+    # Plot delivery points (gpt to add dots to each delivery point)
     x, y = m(lon, lat)
 
     m.plot(lon, lat, latlon=True, color="darkred", linewidth=2, zorder=4)
@@ -64,7 +64,7 @@ def plot_route(path, save=False, res='h'):
         plt.close(fig)             
 
 
-### Not used, gpt generated for testing 
+# not used, gpt generated for testing some plotting
 def plot_pareto(performance, pareto_indices, show_3d=False, save=False):
     """Plot 2D projections (and optional 3D) of the Pareto front."""
     performance = np.array(performance)

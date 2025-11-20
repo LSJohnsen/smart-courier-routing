@@ -9,9 +9,7 @@ import math
 import matplotlib.pyplot as plt
 from courier_route_optimization.constants import EARTH_RADIUS_KM
 
-'''
-decorators or util functuions 
-'''
+
 def timer(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -21,24 +19,25 @@ def timer(func):
         duration = end - start
 
         print(f"{func.__name__} took {duration:.5f} seconds")
-
-        # log timer to csv 
+ 
         log_file = "execution_timer_log.csv"
         with open(log_file, mode='a', newline='') as file:
             writer = csv.writer(file)
             
 
-            if file.tell() == 0:
+            if file.tell() == 0: #indexing - gpt fix
                 writer.writerow(["timestamp", "function", "duration_seconds"])
             writer.writerow([datetime.now().isoformat(), func.__name__, f"{duration:.5f}"])
 
         return result
     return wrapper
 
+# clamp*
 def normalize(x: float) -> float:
     return 0.0 if x < 0.0 else (1.0 if x > 1.0 else x)
 
 # calculates distances from lat/lon, based on https://github.com/mapado/haversine/blob/main/haversine/haversine.py
+
 def haversine(lat1, lon1, lat2, lon2, R=EARTH_RADIUS_KM):
 
     lat1 = math.radians(lat1)
