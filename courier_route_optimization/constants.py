@@ -8,7 +8,7 @@ from enum import Enum
 '''
 Contains constants for the delivery methods, urgency, and earth radius
 '''
-
+# This class was created from AI prompt to allow use of StrEnum in 3.10
 class StrEnum(str, Enum):
     #Python 3.11 StrEnum for Python 3.10 (gpt)
     pass

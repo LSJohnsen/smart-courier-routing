@@ -19,13 +19,14 @@ def pareto_index(points):
             non_dominated.append(i)
     return non_dominated
 
-
+# This code was modified from AI prompt is:
+# fix the nested loop to properly iterate over the different weights:
 def evaluate_pareto_routes(optimizer, n_steps=12, gammas=(0.2, 0.6, 1.0, 1.6), save_csv=True):
     performance, weights, routes, gammas_used = [], [], [], []
     seen = set()  # stop identical duplicate (route + gamma + weights)
 
     for gamma in gammas:            # for each different gamma value iterate over n steps of weight combinations
-        for i in range(n_steps + 1):    #loop fixed by gpt - see report 
+        for i in range(n_steps + 1):     
             for j in range(n_steps + 1 - i):
                 k = n_steps - i - j
                 if i + j + k == 0:

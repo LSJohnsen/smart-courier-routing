@@ -7,6 +7,9 @@ from mpl_toolkits.basemap import Basemap
 
 #https://gis.stackexchange.com/questions/364584/how-to-make-graphs-of-latitude-and-longitude-and-generating-summary-table
 
+# This code was modified from AI with the prompt:
+# 1. Make it so the map is zoomed in on the locations in the file
+# 2. Add dots to the delivery points
 def plot_route(path, save=False, res='h'):
 
     route = pd.read_csv(Path(path))
@@ -16,7 +19,7 @@ def plot_route(path, save=False, res='h'):
 
     pad = 0.002  # smaller for closer zoom
     llcrnrlat, urcrnrlat = lat.min() - pad, lat.max() + pad
-    llcrnrlon, urcrnrlon = lon.min() - pad, lon.max() + pad # zoom of map fixed by gpt
+    llcrnrlon, urcrnrlon = lon.min() - pad, lon.max() + pad 
 
 
     fig = plt.figure(figsize=(10, 8))
@@ -32,7 +35,6 @@ def plot_route(path, save=False, res='h'):
     m.drawparallels(range(int(llcrnrlat), int(urcrnrlat) + 1, 1), labels=[1,0,0,0])
     m.drawmeridians(range(int(llcrnrlon), int(urcrnrlon) + 1, 1), labels=[0,0,0,1])
 
-    # Plot delivery points (gpt to add dots to each delivery point)
     x, y = m(lon, lat)
 
     m.plot(lon, lat, latlon=True, color="darkred", linewidth=2, zorder=4)

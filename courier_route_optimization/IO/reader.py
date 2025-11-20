@@ -67,10 +67,11 @@ def load_deliveries(csv_path: Path):
                     "priority": priority,
                     "weight_kg": weight
                 })
-
+                
+            # This code was modified from AI to unpack key-values 
+            # How can i make the exception properly write out the 
             except Exception as e:
-                rejected.append({"row": i, "cause": str(e), **row}) #(**kwarg unpack key-value instead of just syntax error (fixed by gpt))
-
+                rejected.append({"row": i, "cause": str(e), **row}) 
     return deliveries, rejected
 
 # Writes csv with the rejected deliveries 

@@ -24,8 +24,8 @@ def timer(func):
         with open(log_file, mode='a', newline='') as file:
             writer = csv.writer(file)
             
-
-            if file.tell() == 0: #indexing - gpt fix
+            # This code was modified from AI to fix indexing issues
+            if file.tell() == 0:
                 writer.writerow(["timestamp", "function", "duration_seconds"])
             writer.writerow([datetime.now().isoformat(), func.__name__, f"{duration:.5f}"])
 
